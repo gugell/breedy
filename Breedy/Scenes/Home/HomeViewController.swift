@@ -1,0 +1,70 @@
+//
+//  HomeViewController.swift
+//  Breedy
+//
+//  Created by Ilia Gutu on 10.01.2022.
+//
+
+import UIKit
+import Combine
+
+class HomeViewController: UICollectionViewController, BindableType, HUDPresentable {
+
+    var viewModel: HomeViewModel!
+    private var dataSource: HomeFeedDatasource!
+    private var cancellables = Set<AnyCancellable>()
+
+    private var pagingLayout: UICollectionViewLayout = {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                              heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .fractionalWidth(0.5))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+
+        return layout
+    }()
+
+    init() {
+        super.init(collectionViewLayout: pagingLayout)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupUI()
+        configureDataSource()
+        viewModel.input.viewDidLoad()
+    }
+
+    private func configureDataSource() {
+        dataSource = HomeFeedDatasource(collectionView: collectionView)
+    }
+
+    private func setupUI() {
+        navigationItem.title = L10n.Home.title
+    }
+
+    func bindViewModel() {
+
+        viewModel.$snapshot
+            .sinkOnMainQueue { [weak self] snapshot in
+                self?.dataSource.apply(snapshot, animatingDifferences: false)
+            }
+            .store(in: &cancellables)
+
+        viewModel.$isLoading
+            .sinkOnMainQueue { [weak self] isLoading in
+                isLoading ? self?.showHUD() : self?.hideHUD()
+            }
+            .store(in: &cancellables)
+    }
+}
