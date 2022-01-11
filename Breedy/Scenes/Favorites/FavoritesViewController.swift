@@ -14,6 +14,7 @@ final class FavoritesViewController: UICollectionViewController, BindableType, H
 
     var viewModel: FavoritesViewModel!
     private var dataSource: FavoriteBreedDatasource!
+    var onClose: EmptyAction?
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -55,6 +56,7 @@ final class FavoritesViewController: UICollectionViewController, BindableType, H
         super.viewDidLoad()
 
         configureDataSource()
+        setupUI()
         viewModel.input.viewDidLoad()
     }
 
@@ -75,13 +77,20 @@ final class FavoritesViewController: UICollectionViewController, BindableType, H
         }
     }
 
+    private func setupUI() {
+        navigationItem.title = L10n.Favorites.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                            target: self,
+                                                            action: #selector(didTapCloseButton))
+    }
+
     func bindViewModel() {
         viewModel.$snapshot
             .sinkOnMainQueue { [weak self] snapshot in
                 self?.dataSource.apply(snapshot, animatingDifferences: false)
             }
             .store(in: &cancellables)
-
-        navigationItem.title = L10n.Favorites.title
     }
+
+    @objc func didTapCloseButton() { onClose?() }
 }

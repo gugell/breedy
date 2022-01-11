@@ -10,7 +10,7 @@ import UIKit
 final class FavoritesFlowCoordinator: BaseCoordinator {
 
     private let wireframe: Wireframe
-    var onFinishFlow: EmptyAction?
+    var onClose: EmptyAction?
 
     init(wireframe: Wireframe) {
         self.wireframe = wireframe
@@ -21,6 +21,8 @@ final class FavoritesFlowCoordinator: BaseCoordinator {
     }
 
     private func runInitialFlow() {
-        wireframe.setRootModule(FavoritesModuleAssembly.assembly())
+        let module = FavoritesModuleAssembly.assembly()
+        module.onClose = onClose
+        wireframe.presentEmbedded(module)
     }
 }

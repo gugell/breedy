@@ -15,6 +15,7 @@ class HomeViewController: UICollectionViewController, BindableType, HUDPresentab
     private var cancellables = Set<AnyCancellable>()
 
     var onBreedSelected: Action<Breed, Void>?
+    var onFavoritesSelected: EmptyAction?
 
     private var pagingLayout: UICollectionViewLayout = {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
@@ -53,6 +54,14 @@ class HomeViewController: UICollectionViewController, BindableType, HUDPresentab
 
     private func setupUI() {
         navigationItem.title = L10n.Home.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart.text.square"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(didTapBookmarksButton))
+    }
+
+    @objc private func didTapBookmarksButton() {
+        onFavoritesSelected?()
     }
 
     func bindViewModel() {

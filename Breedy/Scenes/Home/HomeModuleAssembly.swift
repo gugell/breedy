@@ -9,6 +9,7 @@ import Foundation
 
 protocol HomeView: Presentable {
     var onBreedSelected: Action<Breed, Void>? { get set }
+    var onFavoritesSelected: EmptyAction? { get set }
 }
 
 enum HomeModuleAssembly {

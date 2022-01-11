@@ -26,9 +26,16 @@ final class ApplicationFlowService: NSObject, ApplicationService {
         if #available(iOS 15.0, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithDefaultBackground()
-            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            navigationBarAppearance.titleTextAttributes = [
+                .foregroundColor: Colors.kmfBlack(),
+                .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
+            ]
+
+            let appearance = UINavigationBar.appearance()
+            appearance.tintColor  = Colors.kmfBlack()
+            appearance.standardAppearance = navigationBarAppearance
+            appearance.compactAppearance = navigationBarAppearance
+            appearance.scrollEdgeAppearance = navigationBarAppearance
         }
 
         window?.makeKeyAndVisible()

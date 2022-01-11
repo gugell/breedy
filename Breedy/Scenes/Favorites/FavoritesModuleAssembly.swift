@@ -7,7 +7,9 @@
 
 import UIKit
 
-protocol FavoritesView: Presentable { }
+protocol FavoritesView: Presentable {
+    var onClose: EmptyAction? { get set }
+}
 
 enum FavoritesModuleAssembly {
     static func assembly() -> FavoritesView {

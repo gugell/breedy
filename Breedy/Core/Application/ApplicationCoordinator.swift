@@ -28,8 +28,8 @@ final class ApplicationCoordinator: BaseCoordinator {
     }
 
     private func runMainFlow() {
-        let coordinator = TabBarFlowCoordinator(wireframe: wireframe)
-        addDependency(coordinator)
+        let coordinator = HomeFlowCoordinator(wireframe: wireframe)
         coordinator.start()
+        addDependency(coordinator)
     }
 }

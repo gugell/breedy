@@ -28,11 +28,7 @@
 		6551BD7E278C71DE00D7D4EA /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD79278C71DE00D7D4EA /* Presentable.swift */; };
 		6551BD85278C74AF00D7D4EA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6551BD87278C74AF00D7D4EA /* Localizable.strings */; };
 		6551BD8F278C752C00D7D4EA /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD8E278C752C00D7D4EA /* ApplicationCoordinator.swift */; };
-		6551BD92278C75EF00D7D4EA /* TabBarFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD91278C75EF00D7D4EA /* TabBarFlowCoordinator.swift */; };
 		6551BD95278C760F00D7D4EA /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD94278C760F00D7D4EA /* Types.swift */; };
-		6551BD97278C76BD00D7D4EA /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD96278C76BD00D7D4EA /* TabViewController.swift */; };
-		6551BD99278C770700D7D4EA /* TabBarRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD98278C770700D7D4EA /* TabBarRepresentable.swift */; };
-		6551BD9B278C776A00D7D4EA /* TabBarModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD9A278C776A00D7D4EA /* TabBarModuleAssembly.swift */; };
 		6551BD9D278C786B00D7D4EA /* FavoritesFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD9C278C786B00D7D4EA /* FavoritesFlowCoordinator.swift */; };
 		6551BD9F278C78BA00D7D4EA /* FavoritesModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BD9E278C78BA00D7D4EA /* FavoritesModuleAssembly.swift */; };
 		6551BDA1278C78DC00D7D4EA /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BDA0278C78DC00D7D4EA /* UIViewControllerExtensions.swift */; };
@@ -50,7 +46,6 @@
 		6551BDBF278C82EE00D7D4EA /* LookupServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BDBE278C82EE00D7D4EA /* LookupServices.swift */; };
 		6551BDC1278C82FD00D7D4EA /* ProfileServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BDC0278C82FD00D7D4EA /* ProfileServices.swift */; };
 		6551BDC5278C835000D7D4EA /* LookupServiceEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BDC4278C835000D7D4EA /* LookupServiceEndpoints.swift */; };
-		6551BDC7278C836000D7D4EA /* ProfileServiceEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551BDC6278C836000D7D4EA /* ProfileServiceEndpoints.swift */; };
 		6551C105278C9E9200D7D4EA /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C104278C9E9200D7D4EA /* AppEnvironment.swift */; };
 		6551C107278C9E9D00D7D4EA /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C106278C9E9D00D7D4EA /* Environment.swift */; };
 		6551C10A278CA12400D7D4EA /* Breed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C109278CA12400D7D4EA /* Breed.swift */; };
@@ -118,11 +113,7 @@
 		6551BD89278C74C000D7D4EA /* da */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = da; path = da.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6551BD8A278C74C000D7D4EA /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6551BD8E278C752C00D7D4EA /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
-		6551BD91278C75EF00D7D4EA /* TabBarFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFlowCoordinator.swift; sourceTree = "<group>"; };
 		6551BD94278C760F00D7D4EA /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
-		6551BD96278C76BD00D7D4EA /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
-		6551BD98278C770700D7D4EA /* TabBarRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarRepresentable.swift; sourceTree = "<group>"; };
-		6551BD9A278C776A00D7D4EA /* TabBarModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModuleAssembly.swift; sourceTree = "<group>"; };
 		6551BD9C278C786B00D7D4EA /* FavoritesFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesFlowCoordinator.swift; sourceTree = "<group>"; };
 		6551BD9E278C78BA00D7D4EA /* FavoritesModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModuleAssembly.swift; sourceTree = "<group>"; };
 		6551BDA0278C78DC00D7D4EA /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
@@ -140,7 +131,6 @@
 		6551BDBE278C82EE00D7D4EA /* LookupServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupServices.swift; sourceTree = "<group>"; };
 		6551BDC0278C82FD00D7D4EA /* ProfileServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServices.swift; sourceTree = "<group>"; };
 		6551BDC4278C835000D7D4EA /* LookupServiceEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupServiceEndpoints.swift; sourceTree = "<group>"; };
-		6551BDC6278C836000D7D4EA /* ProfileServiceEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceEndpoints.swift; sourceTree = "<group>"; };
 		6551C104278C9E9200D7D4EA /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		6551C106278C9E9D00D7D4EA /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		6551C109278CA12400D7D4EA /* Breed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breed.swift; sourceTree = "<group>"; };
@@ -338,7 +328,6 @@
 		6551BD82278C724000D7D4EA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				6551BD90278C75C600D7D4EA /* Tabs */,
 				6551BD8D278C74EB00D7D4EA /* Favorites */,
 				6551BD8C278C74E400D7D4EA /* Detail */,
 				6551BD8B278C74DF00D7D4EA /* Home */,
@@ -382,17 +371,6 @@
 				6551C12B278DD6E500D7D4EA /* FavoriteBreedDatasource.swift */,
 			);
 			path = Favorites;
-			sourceTree = "<group>";
-		};
-		6551BD90278C75C600D7D4EA /* Tabs */ = {
-			isa = PBXGroup;
-			children = (
-				6551BD91278C75EF00D7D4EA /* TabBarFlowCoordinator.swift */,
-				6551BD96278C76BD00D7D4EA /* TabViewController.swift */,
-				6551BD98278C770700D7D4EA /* TabBarRepresentable.swift */,
-				6551BD9A278C776A00D7D4EA /* TabBarModuleAssembly.swift */,
-			);
-			path = Tabs;
 			sourceTree = "<group>";
 		};
 		6551BD93278C760600D7D4EA /* Extensions */ = {
@@ -452,7 +430,6 @@
 			isa = PBXGroup;
 			children = (
 				6551BDC0278C82FD00D7D4EA /* ProfileServices.swift */,
-				6551BDC6278C836000D7D4EA /* ProfileServiceEndpoints.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -769,7 +746,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6551C118278CB21900D7D4EA /* CollectionViewLayoutExtensions.swift in Sources */,
-				6551BDC7278C836000D7D4EA /* ProfileServiceEndpoints.swift in Sources */,
 				6551C125278D84F600D7D4EA /* BreedDetailDatasource.swift in Sources */,
 				6551BDB7278C7CD900D7D4EA /* FavoritesViewModel.swift in Sources */,
 				6551BDB1278C7BA900D7D4EA /* FavoritesViewController.swift in Sources */,
@@ -779,7 +755,6 @@
 				6551C113278CADD000D7D4EA /* HomeFeedDatasource.swift in Sources */,
 				6551C12C278DD6E500D7D4EA /* FavoriteBreedDatasource.swift in Sources */,
 				6551C110278CA8C700D7D4EA /* LookupBreedsResponseMapper.swift in Sources */,
-				6551BD92278C75EF00D7D4EA /* TabBarFlowCoordinator.swift in Sources */,
 				6551C10A278CA12400D7D4EA /* Breed.swift in Sources */,
 				6551BD75278C71B300D7D4EA /* Wireframe.swift in Sources */,
 				6551BDAE278C7B8600D7D4EA /* Assets.swift in Sources */,
@@ -802,7 +777,6 @@
 				6551BDA7278C7A4D00D7D4EA /* HomeFlowCoordinator.swift in Sources */,
 				6551BDBC278C82C700D7D4EA /* MoyaProviderFactory.swift in Sources */,
 				6551C11A278D560F00D7D4EA /* ImageFetchers.swift in Sources */,
-				6551BD97278C76BD00D7D4EA /* TabViewController.swift in Sources */,
 				6551BD9D278C786B00D7D4EA /* FavoritesFlowCoordinator.swift in Sources */,
 				6551BDB3278C7BC400D7D4EA /* HomeViewController.swift in Sources */,
 				6551BD69278C714500D7D4EA /* ApplicationFlowService.swift in Sources */,
@@ -817,9 +791,7 @@
 				6551C107278C9E9D00D7D4EA /* Environment.swift in Sources */,
 				6551BD7E278C71DE00D7D4EA /* Presentable.swift in Sources */,
 				6551BD6E278C717000D7D4EA /* DeepLinkOption.swift in Sources */,
-				6551BD99278C770700D7D4EA /* TabBarRepresentable.swift in Sources */,
 				6551BD33278C6E7800D7D4EA /* AppDelegate.swift in Sources */,
-				6551BD9B278C776A00D7D4EA /* TabBarModuleAssembly.swift in Sources */,
 				6551BDAF278C7B8600D7D4EA /* L10n.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1012,6 +984,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1041,6 +1014,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
