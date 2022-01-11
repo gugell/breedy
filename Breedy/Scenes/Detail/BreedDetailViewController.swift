@@ -1,20 +1,18 @@
 //
-//  HomeViewController.swift
+//  BreedDetailViewController.swift
 //  Breedy
 //
-//  Created by Ilia Gutu on 10.01.2022.
+//  Created by Ilia Gutu on 11.01.2022.
 //
-
 import UIKit
 import Combine
 
-class HomeViewController: UICollectionViewController, BindableType, HUDPresentable, HomeView {
+final class BreedDetailViewController: UICollectionViewController, BindableType, HUDPresentable, BreedDetailView {
 
-    var viewModel: HomeViewModel!
-    private var dataSource: HomeFeedDatasource!
+    var viewModel: BreedDetailViewModel!
+    private var dataSource: BreedDetailDatasource!
     private var cancellables = Set<AnyCancellable>()
-
-    var onBreedSelected: Action<Breed, Void>?
+    var onClose: EmptyAction?
 
     private var pagingLayout: UICollectionViewLayout = {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
@@ -48,15 +46,16 @@ class HomeViewController: UICollectionViewController, BindableType, HUDPresentab
     }
 
     private func configureDataSource() {
-        dataSource = HomeFeedDatasource(collectionView: collectionView)
+        dataSource = BreedDetailDatasource(collectionView: collectionView)
     }
 
     private func setupUI() {
-        navigationItem.title = L10n.Home.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                            target: self,
+                                                            action: #selector(didTapCloseButton))
     }
 
     func bindViewModel() {
-
         viewModel.$snapshot
             .sinkOnMainQueue { [weak self] snapshot in
                 self?.dataSource.apply(snapshot, animatingDifferences: false)
@@ -68,10 +67,9 @@ class HomeViewController: UICollectionViewController, BindableType, HUDPresentab
                 isLoading ? self?.showHUD() : self?.hideHUD()
             }
             .store(in: &cancellables)
+
+        navigationItem.title = viewModel.title
     }
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
-        onBreedSelected?(selectedItem.item)
-    }
+    @objc func didTapCloseButton() { onClose?() }
 }

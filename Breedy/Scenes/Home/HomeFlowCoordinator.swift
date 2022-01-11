@@ -10,7 +10,7 @@ import UIKit
 final class HomeFlowCoordinator: BaseCoordinator {
 
     private let wireframe: Wireframe
-    var onFinishFlow: Action<Void>?
+    var onFinishFlow: EmptyAction?
 
     init(wireframe: Wireframe) {
         self.wireframe = wireframe
@@ -21,6 +21,15 @@ final class HomeFlowCoordinator: BaseCoordinator {
     }
 
     private func runInitialFlow() {
-        wireframe.setRootModule(HomeModuleAssembly.assembly())
+        let homeView = HomeModuleAssembly.assembly()
+        homeView.onBreedSelected = showBreedDetails
+        wireframe.setRootModule(homeView)
+    }
+
+    private func showBreedDetails(_ breed: Breed) {
+        let module = BreedDetailModuleAssembly.assembly(breed)
+        module.onClose = { [weak self] in self?.wireframe.dismissModule() }
+
+        wireframe.presentEmbedded(module)
     }
 }

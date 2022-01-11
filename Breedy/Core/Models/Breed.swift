@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Breed {
+struct Breed: Hashable {
     let name: String
     let subBreeds: [Breed]
 }

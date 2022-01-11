@@ -7,4 +7,11 @@
 
 import Foundation
 
-typealias Action<T> = () -> T
+typealias Action<T, U> = (T) -> U
+typealias EmptyAction = () -> Void
+
+extension ColorAsset {
+    func callAsFunction() -> Color {
+        return color
+    }
+}

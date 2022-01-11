@@ -58,7 +58,7 @@ class DefaultWireframe: NSObject, Wireframe, UINavigationControllerDelegate {
         push(module, animated: true)
     }
 
-    func push(_ module: Presentable?, completion: Action<Void>?) {
+    func push(_ module: Presentable?, completion: EmptyAction?) {
         push(module, animated: true, hideBottomBar: false, completion: completion)
     }
 

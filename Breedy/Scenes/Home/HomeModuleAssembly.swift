@@ -7,8 +7,12 @@
 
 import Foundation
 
+protocol HomeView: Presentable {
+    var onBreedSelected: Action<Breed, Void>? { get set }
+}
+
 enum HomeModuleAssembly {
-    static func assembly() -> Presentable {
+    static func assembly() -> HomeView {
         var viewController = HomeViewController()
         let viewModel = HomeViewModel()
         viewController.bind(to: viewModel)

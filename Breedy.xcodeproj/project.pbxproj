@@ -61,6 +61,11 @@
 		6551C116278CAE1E00D7D4EA /* BreedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C115278CAE1E00D7D4EA /* BreedCollectionViewCell.swift */; };
 		6551C118278CB21900D7D4EA /* CollectionViewLayoutExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C117278CB21900D7D4EA /* CollectionViewLayoutExtensions.swift */; };
 		6551C11A278D560F00D7D4EA /* ImageFetchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C119278D560F00D7D4EA /* ImageFetchers.swift */; };
+		6551C11C278D7CD300D7D4EA /* BreedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C11B278D7CD300D7D4EA /* BreedDetailViewController.swift */; };
+		6551C11E278D7CEC00D7D4EA /* BreedDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C11D278D7CEC00D7D4EA /* BreedDetailViewModel.swift */; };
+		6551C120278D7CF800D7D4EA /* BreedDetailModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C11F278D7CF800D7D4EA /* BreedDetailModuleAssembly.swift */; };
+		6551C123278D82E200D7D4EA /* BreedImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C122278D82E200D7D4EA /* BreedImageCollectionViewCell.swift */; };
+		6551C125278D84F600D7D4EA /* BreedDetailDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551C124278D84F500D7D4EA /* BreedDetailDatasource.swift */; };
 		ABD65A402800C27B184BE087 /* Pods_Breedy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E4FC62BEE2B259201F9EEBD /* Pods_Breedy.framework */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +148,11 @@
 		6551C115278CAE1E00D7D4EA /* BreedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedCollectionViewCell.swift; sourceTree = "<group>"; };
 		6551C117278CB21900D7D4EA /* CollectionViewLayoutExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutExtensions.swift; sourceTree = "<group>"; };
 		6551C119278D560F00D7D4EA /* ImageFetchers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchers.swift; sourceTree = "<group>"; };
+		6551C11B278D7CD300D7D4EA /* BreedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedDetailViewController.swift; sourceTree = "<group>"; };
+		6551C11D278D7CEC00D7D4EA /* BreedDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedDetailViewModel.swift; sourceTree = "<group>"; };
+		6551C11F278D7CF800D7D4EA /* BreedDetailModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedDetailModuleAssembly.swift; sourceTree = "<group>"; };
+		6551C122278D82E200D7D4EA /* BreedImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		6551C124278D84F500D7D4EA /* BreedDetailDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedDetailDatasource.swift; sourceTree = "<group>"; };
 		6B3C051342BC75119BD537D9 /* Pods-Breedy-BreedyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breedy-BreedyUITests.release.xcconfig"; path = "Target Support Files/Pods-Breedy-BreedyUITests/Pods-Breedy-BreedyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8718BAD03E01371CFC01D063 /* Pods-BreedyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreedyTests.debug.xcconfig"; path = "Target Support Files/Pods-BreedyTests/Pods-BreedyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E4FC62BEE2B259201F9EEBD /* Pods_Breedy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Breedy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -346,6 +356,11 @@
 		6551BD8C278C74E400D7D4EA /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				6551C121278D82C500D7D4EA /* Components */,
+				6551C11B278D7CD300D7D4EA /* BreedDetailViewController.swift */,
+				6551C11D278D7CEC00D7D4EA /* BreedDetailViewModel.swift */,
+				6551C11F278D7CF800D7D4EA /* BreedDetailModuleAssembly.swift */,
+				6551C124278D84F500D7D4EA /* BreedDetailDatasource.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -446,6 +461,14 @@
 			isa = PBXGroup;
 			children = (
 				6551C115278CAE1E00D7D4EA /* BreedCollectionViewCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6551C121278D82C500D7D4EA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6551C122278D82E200D7D4EA /* BreedImageCollectionViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -730,8 +753,11 @@
 			files = (
 				6551C118278CB21900D7D4EA /* CollectionViewLayoutExtensions.swift in Sources */,
 				6551BDC7278C836000D7D4EA /* ProfileServiceEndpoints.swift in Sources */,
+				6551C125278D84F600D7D4EA /* BreedDetailDatasource.swift in Sources */,
 				6551BDB7278C7CD900D7D4EA /* FavoritesViewModel.swift in Sources */,
 				6551BDB1278C7BA900D7D4EA /* FavoritesViewController.swift in Sources */,
+				6551C11C278D7CD300D7D4EA /* BreedDetailViewController.swift in Sources */,
+				6551C120278D7CF800D7D4EA /* BreedDetailModuleAssembly.swift in Sources */,
 				6551C113278CADD000D7D4EA /* HomeFeedDatasource.swift in Sources */,
 				6551C110278CA8C700D7D4EA /* LookupBreedsResponseMapper.swift in Sources */,
 				6551BD92278C75EF00D7D4EA /* TabBarFlowCoordinator.swift in Sources */,
@@ -751,6 +777,7 @@
 				6551BD7D278C71DE00D7D4EA /* BindableType.swift in Sources */,
 				6551BDC1278C82FD00D7D4EA /* ProfileServices.swift in Sources */,
 				6551BDB9278C824800D7D4EA /* HomeViewModel.swift in Sources */,
+				6551C11E278D7CEC00D7D4EA /* BreedDetailViewModel.swift in Sources */,
 				6551C105278C9E9200D7D4EA /* AppEnvironment.swift in Sources */,
 				6551BDA7278C7A4D00D7D4EA /* HomeFlowCoordinator.swift in Sources */,
 				6551BDBC278C82C700D7D4EA /* MoyaProviderFactory.swift in Sources */,
@@ -762,6 +789,7 @@
 				6551BDAD278C7B8600D7D4EA /* Colors.swift in Sources */,
 				6551C10E278CA52100D7D4EA /* MoyaProvider+Codable.swift in Sources */,
 				6551BD65278C70DF00D7D4EA /* AppServicesManager.swift in Sources */,
+				6551C123278D82E200D7D4EA /* BreedImageCollectionViewCell.swift in Sources */,
 				6551BDA1278C78DC00D7D4EA /* UIViewControllerExtensions.swift in Sources */,
 				6551BD67278C711200D7D4EA /* AppServicesManager+AppInitializing.swift in Sources */,
 				6551BD6F278C717000D7D4EA /* BaseCoordinator.swift in Sources */,

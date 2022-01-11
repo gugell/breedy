@@ -59,7 +59,8 @@ final class HomeViewModel {
             .store(in: &cancellables)
 
         items
-            .compactMap { $0.map { BreedCollectionViewCellViewModel(name: $0.name) } }
+            .compactMap { $0.map { BreedCollectionViewCellViewModel(name: $0.name,
+                                                                    item: $0) } }
             .map { items -> Snapshot in
                 var snapshot = Snapshot()
                 snapshot.appendSections([0])

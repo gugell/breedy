@@ -54,4 +54,5 @@ class BreedCollectionViewCell: UICollectionViewCell, BindableType, Reusable {
 
 struct BreedCollectionViewCellViewModel: Hashable {
     let name: String
+    let item: Breed
 }

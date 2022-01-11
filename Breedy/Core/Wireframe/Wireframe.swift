@@ -14,15 +14,15 @@ protocol Wireframe: Presentable {
     func present(_ module: Presentable?, animated: Bool)
 
     func push(_ module: Presentable?)
-    func push(_ module: Presentable?, completion: Action<Void>?)
+    func push(_ module: Presentable?, completion: EmptyAction?)
     func push(_ module: Presentable?, animated: Bool)
-    func push(_ module: Presentable?, animated: Bool, completion: Action<Void>?)
+    func push(_ module: Presentable?, animated: Bool, completion: EmptyAction?)
 
     func popModule()
     func popModule(animated: Bool)
 
     func dismissModule()
-    func dismissModule(animated: Bool, completion: Action<Void>?)
+    func dismissModule(animated: Bool, completion: EmptyAction?)
 
     func setRootModule(_ module: Presentable?)
     func setRootModule(_ module: Presentable?, hideBar: Bool)

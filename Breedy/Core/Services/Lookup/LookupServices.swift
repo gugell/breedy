@@ -12,6 +12,8 @@ protocol LookupService {
     func lookupBreeds() -> Deferred<Future<[Breed], LookupServiceError>>
     func lookupRandomBreedImage(_ breed: String,
                                 completionHandler: @escaping  (Result<URL, LookupServiceError>) -> Void)
+    func lookupBreedImages(_ breed: String,
+                           completionHandler: @escaping  (Result<[URL], LookupServiceError>) -> Void)
 }
 
 public enum LookupServiceError: Error {
@@ -49,6 +51,16 @@ final class LookupServiceImpl: LookupService {
         }
     }
 
+    func lookupBreedImages(_ breed: String,
+                           completionHandler: @escaping  (Result<[URL], LookupServiceError>) -> Void) {
+        provider.request(.breedImages(breed: breed),
+                              objectType: BreedImagesResponse.self) { returnData in
+            completionHandler(.success(returnData.message))
+        } failure: { error in
+            completionHandler(.failure(LookupServiceError.failure(error)))
+        }
+    }
+
     func lookupRandomBreedImage(_ breed: String,
                                 completionHandler: @escaping  (Result<URL, LookupServiceError>) -> Void) {
         provider.request(.randomBreedImage(breed: breed),
@@ -56,6 +68,16 @@ final class LookupServiceImpl: LookupService {
             completionHandler(.success(returnData.message))
         } failure: { error in
             completionHandler(.failure(LookupServiceError.failure(error)))
+        }
+    }
+}
+
+extension LookupService {
+    func lookupBreedImagesPublisher(_ breed: String) -> Deferred<Future<[URL], LookupServiceError>> {
+        Deferred {
+            Future { promise in
+                self.lookupBreedImages(breed, completionHandler: promise)
+            }
         }
     }
 }

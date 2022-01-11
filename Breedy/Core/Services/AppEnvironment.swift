@@ -32,6 +32,10 @@ extension AppEnvironment {
         current.lookupService
     }
 
+    public static var profileServices: ProfileServices {
+        return current.profileServices
+    }
+
     public static var baseURL: URL {
         current.baseURL
     }

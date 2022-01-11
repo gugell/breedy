@@ -20,4 +20,9 @@ extension UIImageView {
             }
         }
     }
+
+    func loadBreedImage(_ url: URL) {
+        kf.indicatorType = .activity
+        kf.setImage(with: url)
+    }
 }

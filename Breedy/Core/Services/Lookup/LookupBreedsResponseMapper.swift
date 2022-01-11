@@ -28,3 +28,8 @@ struct RandomImageResponse: Codable {
     let status: String
     let message: URL
 }
+
+struct BreedImagesResponse: Codable {
+    let status: String
+    let message: [URL]
+}

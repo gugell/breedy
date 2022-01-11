@@ -10,7 +10,7 @@ import UIKit
 final class TabBarFlowCoordinator: BaseCoordinator {
 
     private let wireframe: Wireframe
-    var onFinishFlow: Action<Void>?
+    var onFinishFlow: EmptyAction?
 
     init(wireframe: Wireframe) {
         self.wireframe = wireframe
