@@ -13,16 +13,19 @@ final class FavoritesViewModel {
     let input = Input()
     private var cancellables = Set<AnyCancellable>()
 
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, BreedCollectionViewCellViewModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<String, BreedImageCollectionViewCellViewModel>
 
     @Published private(set) var isLoading = false
     @Published private(set) var snapshot = Snapshot()
 
     struct Dependency {
         let lookupService: LookupService
+        let profileServices: ProfileServices
 
-        init(lookupService: LookupService = AppEnvironment.lookupService) {
+        init(lookupService: LookupService = AppEnvironment.lookupService,
+             profileServices: ProfileServices = AppEnvironment.profileServices) {
             self.lookupService = lookupService
+            self.profileServices = profileServices
         }
     }
 
@@ -48,7 +51,7 @@ final class FavoritesViewModel {
 
         let items = input.viewDidLoadSubject
             .flatMapLatest {
-                dependency.lookupService.lookupBreeds()
+                dependency.profileServices.allFavorites()
                     .replaceError(with: [])
             }
             .shareReplay()
@@ -59,11 +62,19 @@ final class FavoritesViewModel {
             .store(in: &cancellables)
 
         items
-            .compactMap { $0.map { BreedCollectionViewCellViewModel(name: $0.name, item: $0) } }
-            .map { items -> Snapshot in
+            .print("bookmarks")
+            .map { bookmarks -> Snapshot in
                 var snapshot = Snapshot()
-                snapshot.appendSections([0])
-                snapshot.appendItems(items)
+
+                bookmarks.forEach { bookmark in
+                    snapshot.appendSections([bookmark.breed.name])
+                    let viewModels = bookmark.images
+                        .map { BreedImageCollectionViewCellViewModel(url: $0,
+                                                                     isFavorite: dependency.profileServices.isFavorite($0, breed: bookmark.breed),
+                                                                     item: bookmark.breed) }
+                    snapshot.appendItems(viewModels, toSection: bookmark.breed.name)
+                }
+
                 return snapshot
             }
             .assign(to: \.snapshot, on: self, ownership: .weak, scheduler: scheduler)

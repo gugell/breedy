@@ -7,9 +7,13 @@
 
 import UIKit
 
+protocol FavoritesView: Presentable { }
+
 enum FavoritesModuleAssembly {
-    static func assembly() -> Presentable {
-        let viewController = FavoritesViewController()
+    static func assembly() -> FavoritesView {
+        var viewController = FavoritesViewController()
+        let viewModel = FavoritesViewModel()
+        viewController.bind(to: viewModel)
 
         return viewController
     }

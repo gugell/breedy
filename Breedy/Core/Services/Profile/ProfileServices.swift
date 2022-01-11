@@ -6,23 +6,38 @@
 //
 
 import Foundation
+import Combine
+
+typealias CacheContent = [Bookmark]
 
 protocol ProfileServices {
     func isFavorite(_ url: URL, breed: Breed) -> Bool
     func bookmarkImage(with url: URL, breed: Breed)
+    func allFavorites() -> AnyPublisher<CacheContent, Never>
 }
 
 final class ProfileServicesImpl: ProfileServices {
 
-    private var cache: [Breed: [URL]] = [:]
+    private var cache: [Bookmark] = []
+    private let storageStream = CurrentValueSubject<CacheContent, Never>([])
 
     func isFavorite(_ url: URL, breed: Breed) -> Bool {
-        return cache[breed]?.contains(url) ?? false
+        return cache.first(where: { $0.breed.name == breed.name && $0.images.contains(url) }) != nil
+    }
+
+    func allFavorites() -> AnyPublisher<CacheContent, Never> {
+        return storageStream
+            .eraseToAnyPublisher()
     }
 
     func bookmarkImage(with url: URL, breed: Breed) {
-        var breedImages = cache[breed] ?? []
-        breedImages.contains(url) ? breedImages = breedImages.filter { $0 != url } : breedImages.append(url)
-        cache[breed] = breedImages
+        if let index = cache.firstIndex(where: { $0.breed == breed }) {
+            var breedImages = cache[index].images
+            breedImages.contains(url) ? breedImages = breedImages.filter { $0 != url } : breedImages.append(url)
+            cache[index] = Bookmark(breed: breed, images: breedImages)
+            return
+        }
+        cache.append(Bookmark(breed: breed, images: [url]))
+        storageStream.send(cache)
     }
 }
