@@ -7,7 +7,11 @@
 */
 
 // MARK: - Home
-"home.title" = "Home DK";
+"home.title" = "Home DA";
 
 // MARK: - Favorites
-"favorites.title" = "Favorites DK";
+"favorites.title" = "Favorites DA";
+
+"action.retry" = "Retry DA";
+"error.fetch.title" = "Fetch error DA";
+"error.fetch.message" = "Can't fetch the breeds from server DA";

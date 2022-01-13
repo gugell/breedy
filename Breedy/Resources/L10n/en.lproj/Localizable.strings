@@ -11,3 +11,11 @@
 
 // MARK: - Favorites
 "favorites.title" = "Favorites";
+
+"action.retry" = "Retry";
+"error.fetch.title" = "Fetch error";
+"error.fetch.message" = "Can't fetch the breeds from server";
+
+
+"alert.ok" = "OK";
+"alert.cancel" = "Cancel";

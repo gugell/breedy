@@ -11,6 +11,27 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 public enum L10n {
 
+  public enum Action {
+    /// Retry
+    public static let retry = L10n.tr("Localizable", "action.retry")
+  }
+
+  public enum Alert {
+    /// Cancel
+    public static let cancel = L10n.tr("Localizable", "alert.cancel")
+    /// OK
+    public static let ok = L10n.tr("Localizable", "alert.ok")
+  }
+
+  public enum Error {
+    public enum Fetch {
+      /// Can't fetch the breeds from server
+      public static let message = L10n.tr("Localizable", "error.fetch.message")
+      /// Fetch error
+      public static let title = L10n.tr("Localizable", "error.fetch.title")
+    }
+  }
+
   public enum Favorites {
     /// Favorites
     public static let title = L10n.tr("Localizable", "favorites.title")

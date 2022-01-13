@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias LookupBreedsResponse = APIResponse<[String: [String]]>
+
 enum LookupBreedsResponseMapper {
     static func mapResponse(_ response: LookupBreedsResponse) -> [Breed] {
         return response.message.reduce([Breed]()) { result, item in
@@ -19,17 +21,7 @@ enum LookupBreedsResponseMapper {
     }
 }
 
-struct LookupBreedsResponse: Codable {
+struct APIResponse<T: Codable>: Codable {
     let status: String
-    let message: [String: [String]]
-}
-
-struct RandomImageResponse: Codable {
-    let status: String
-    let message: URL
-}
-
-struct BreedImagesResponse: Codable {
-    let status: String
-    let message: [URL]
+    let message: T
 }

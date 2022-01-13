@@ -14,8 +14,10 @@ final class HomeViewModel {
 
     @Published private(set) var isLoading = false
     @Published private(set) var snapshot = Snapshot()
+    @Published private(set) var fetchError: LookupServiceError?
 
     let input = Input()
+    let output: Output
     private var cancellables = Set<AnyCancellable>()
 
     struct Dependency {
@@ -27,8 +29,12 @@ final class HomeViewModel {
     }
 
     struct Input {
-        fileprivate let viewDidLoadSubject = PassthroughSubject<Void, Never>()
-        func viewDidLoad() { viewDidLoadSubject.send() }
+        fileprivate let reloadSubject = PassthroughSubject<Void, Never>()
+        func viewDidLoad() { reloadSubject.send() }
+    }
+
+    struct Output {
+        let showAlert: AnyPublisher<Alert, Never>
     }
 
     convenience init(dependency: Dependency = Dependency()) {
@@ -36,23 +42,32 @@ final class HomeViewModel {
     }
 
     init<SchedulerType: Scheduler>(dependency: Dependency = Dependency(), scheduler: SchedulerType) {
-        fetchHomeScreenContent(dependency: dependency, scheduler: scheduler)
+        let showAlertSubject = PassthroughSubject<Alert, Never>()
+        self.output = Output(showAlert: showAlertSubject.eraseToAnyPublisher())
+        fetchHomeScreenContent(showAlertSubject: showAlertSubject,
+                               dependency: dependency, scheduler: scheduler)
     }
 
-    private func fetchHomeScreenContent<SchedulerType: Scheduler>(dependency: Dependency, scheduler: SchedulerType) {
-
-        input.viewDidLoadSubject
+    private func fetchHomeScreenContent<SchedulerType: Scheduler>(showAlertSubject: PassthroughSubject<Alert, Never>,
+                                                                  dependency: Dependency,
+                                                                  scheduler: SchedulerType) {
+        input.reloadSubject
             .mapTo(true)
             .assign(to: \.isLoading, on: self, ownership: .weak, scheduler: scheduler)
             .store(in: &cancellables)
 
-        let items = input.viewDidLoadSubject
+        let items = input.reloadSubject
             .flatMapLatest {
                 dependency.lookupService.lookupBreeds()
-                    .replaceError(with: [])
+                    .forwardError(to: \.fetchError, on: self, scheduler: scheduler)
             }
             .shareReplay()
             .eraseToAnyPublisher()
+
+        items
+            .mapTo(nil)
+            .assign(to: \.fetchError, on: self, ownership: .weak, scheduler: scheduler)
+            .store(in: &cancellables)
 
         items.mapTo(false)
             .assign(to: \.isLoading, on: self, ownership: .weak, scheduler: scheduler)
@@ -68,6 +83,26 @@ final class HomeViewModel {
                 return snapshot
             }
             .assign(to: \.snapshot, on: self, ownership: .weak, scheduler: scheduler)
+            .store(in: &cancellables)
+
+        $fetchError
+            .mapTo(false)
+            .assign(to: \.isLoading, on: self, ownership: .weak, scheduler: scheduler)
+            .store(in: &cancellables)
+
+        $fetchError
+            .unwrap()
+            .map { error -> Alert in
+                let retryAction = Alert.Action(title: L10n.Action.retry, style: .default) { [weak self] in
+                    self?.input.reloadSubject.send(())
+                }
+                return Alert(title: L10n.Error.Fetch.title,
+                             message: error.localizedDescription,
+                             actions: [retryAction, Alert.Action.cancel])
+            }
+            .sink {
+                showAlertSubject.send($0)
+            }
             .store(in: &cancellables)
 
     }

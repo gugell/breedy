@@ -11,7 +11,8 @@ import Moya
 enum _MoyaProvider {
     static func of<Target: TargetType>(ofType type: Target.Type) -> MoyaProvider<Target> {
         return MoyaProvider<Target>(plugins: [
-            NetworkLoggerPlugin.verbose
+            NetworkLoggerPlugin.verbose,
+            MapErrorPlugin()
         ])
     }
 }

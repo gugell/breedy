@@ -19,6 +19,7 @@ protocol LookupService {
 public enum LookupServiceError: Error {
     case failure(Error)
     case badResponse
+    case reason(String)
 
     var localizedDescription: String {
         switch self {
@@ -26,6 +27,8 @@ public enum LookupServiceError: Error {
             return "Bad response from server"
         case .failure(let error):
             return error.localizedDescription
+        case .reason(let message):
+            return message
         }
     }
 
@@ -54,7 +57,7 @@ final class LookupServiceImpl: LookupService {
     func lookupBreedImages(_ breed: String,
                            completionHandler: @escaping  (Result<[URL], LookupServiceError>) -> Void) {
         provider.request(.breedImages(breed: breed),
-                              objectType: BreedImagesResponse.self) { returnData in
+                              objectType: APIResponse<[URL]>.self) { returnData in
             completionHandler(.success(returnData.message))
         } failure: { error in
             completionHandler(.failure(LookupServiceError.failure(error)))
@@ -64,7 +67,7 @@ final class LookupServiceImpl: LookupService {
     func lookupRandomBreedImage(_ breed: String,
                                 completionHandler: @escaping  (Result<URL, LookupServiceError>) -> Void) {
         provider.request(.randomBreedImage(breed: breed),
-                              objectType: RandomImageResponse.self) { returnData in
+                              objectType: APIResponse<URL>.self) { returnData in
             completionHandler(.success(returnData.message))
         } failure: { error in
             completionHandler(.failure(LookupServiceError.failure(error)))
