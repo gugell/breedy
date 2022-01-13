@@ -68,6 +68,12 @@ final class BreedDetailViewController: UICollectionViewController, BindableType,
             }
             .store(in: &cancellables)
 
+        viewModel.output.showAlert
+            .sinkOnMainQueue { [unowned self] alert in
+                self.present(alert, animated: true)
+            }
+            .store(in: &cancellables)
+
         navigationItem.title = viewModel.title
     }
 

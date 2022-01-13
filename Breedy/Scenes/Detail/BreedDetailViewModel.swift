@@ -14,9 +14,11 @@ final class BreedDetailViewModel {
 
     @Published private(set) var isLoading = false
     @Published private(set) var snapshot = Snapshot()
+    @Published private(set) var fetchError: LookupServiceError?
     @Published private(set) var title = ""
 
     let input = Input()
+    let output: Output
     private var cancellables = Set<AnyCancellable>()
 
     struct Dependency {
@@ -31,8 +33,12 @@ final class BreedDetailViewModel {
     }
 
     struct Input {
-        fileprivate let viewDidLoadSubject = PassthroughSubject<Void, Never>()
-        func viewDidLoad() { viewDidLoadSubject.send() }
+        fileprivate let reloadSubject = PassthroughSubject<Void, Never>()
+        func viewDidLoad() { reloadSubject.send() }
+    }
+
+    struct Output {
+        let showAlert: AnyPublisher<Alert, Never>
     }
 
     convenience init(breed: Breed, dependency: Dependency = Dependency()) {
@@ -40,24 +46,26 @@ final class BreedDetailViewModel {
     }
 
     init<SchedulerType: Scheduler>(breed: Breed, dependency: Dependency = Dependency(), scheduler: SchedulerType) {
-        fetchBreedContent(breed: breed, dependency: dependency, scheduler: scheduler)
+        let showAlertSubject = PassthroughSubject<Alert, Never>()
+        self.output = Output(showAlert: showAlertSubject.eraseToAnyPublisher())
+        fetchBreedContent(showAlertSubject: showAlertSubject, breed: breed, dependency: dependency, scheduler: scheduler)
     }
 
-    private func fetchBreedContent<SchedulerType: Scheduler>(breed: Breed,
+    private func fetchBreedContent<SchedulerType: Scheduler>(showAlertSubject: PassthroughSubject<Alert, Never>, breed: Breed,
                                                              dependency: Dependency,
                                                              scheduler: SchedulerType) {
 
         title = breed.name.capitalized
 
-        input.viewDidLoadSubject
+        input.reloadSubject
             .mapTo(true)
             .assign(to: \.isLoading, on: self, ownership: .weak, scheduler: scheduler)
             .store(in: &cancellables)
 
-        let items = input.viewDidLoadSubject
+        let items = input.reloadSubject
             .flatMapLatest {
                 dependency.lookupService.lookupBreedImagesPublisher(breed.name)
-                    .replaceError(with: [])
+                    .forwardError(to: \.fetchError, on: self, scheduler: scheduler)
             }
             .shareReplay()
             .eraseToAnyPublisher()
@@ -78,6 +86,26 @@ final class BreedDetailViewModel {
                 return snapshot
             }
             .assign(to: \.snapshot, on: self, ownership: .weak, scheduler: scheduler)
+            .store(in: &cancellables)
+
+        $fetchError
+            .mapTo(false)
+            .assign(to: \.isLoading, on: self, ownership: .weak, scheduler: scheduler)
+            .store(in: &cancellables)
+
+        $fetchError
+            .unwrap()
+            .map { error -> Alert in
+                let retryAction = Alert.Action(title: L10n.Action.retry, style: .default) { [weak self] in
+                    self?.input.reloadSubject.send(())
+                }
+                return Alert(title: L10n.Error.Fetch.title,
+                             message: error.localizedDescription,
+                             actions: [retryAction, Alert.Action.cancel])
+            }
+            .sink {
+                showAlertSubject.send($0)
+            }
             .store(in: &cancellables)
 
     }
