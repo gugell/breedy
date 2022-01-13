@@ -69,7 +69,7 @@ final class FavoritesViewModel {
                 bookmarks.forEach { bookmark in
                     snapshot.appendSections([bookmark.breed.name])
                     let viewModels = bookmark.images
-                        .map { BreedImageCollectionViewCellViewModel(url: $0,
+                        .map { BreedImageCollectionViewCellViewModel(url: $0, // swiftlint:disable:next line_length
                                                                      isFavorite: dependency.profileServices.isFavorite($0, breed: bookmark.breed),
                                                                      item: bookmark.breed) }
                     snapshot.appendItems(viewModels, toSection: bookmark.breed.name)

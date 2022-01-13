@@ -48,10 +48,14 @@ final class BreedDetailViewModel {
     init<SchedulerType: Scheduler>(breed: Breed, dependency: Dependency = Dependency(), scheduler: SchedulerType) {
         let showAlertSubject = PassthroughSubject<Alert, Never>()
         self.output = Output(showAlert: showAlertSubject.eraseToAnyPublisher())
-        fetchBreedContent(showAlertSubject: showAlertSubject, breed: breed, dependency: dependency, scheduler: scheduler)
+        fetchBreedContent(showAlertSubject: showAlertSubject,
+                          breed: breed,
+                          dependency: dependency,
+                          scheduler: scheduler)
     }
 
-    private func fetchBreedContent<SchedulerType: Scheduler>(showAlertSubject: PassthroughSubject<Alert, Never>, breed: Breed,
+    private func fetchBreedContent<SchedulerType: Scheduler>(showAlertSubject: PassthroughSubject<Alert, Never>,
+                                                             breed: Breed,
                                                              dependency: Dependency,
                                                              scheduler: SchedulerType) {
 
@@ -75,7 +79,7 @@ final class BreedDetailViewModel {
             .store(in: &cancellables)
 
         items
-            .compactMap { $0.map { BreedImageCollectionViewCellViewModel(url: $0,
+            .compactMap { $0.map { BreedImageCollectionViewCellViewModel(url: $0, // swiftlint:disable:next line_length
                                                                          isFavorite: dependency.profileServices.isFavorite($0,
                                                                                                 breed: breed),
                                                                          item: breed) } }

@@ -91,7 +91,7 @@ extension Publisher {
 extension Publisher {
     func forwardError<Root: AnyObject, S: Scheduler>(to error: ReferenceWritableKeyPath<Root,
                                                      Failure?>,
-                                                     on object: Root,
+                                                     on object: Root,        // swiftlint:disable:next line_length
                                                      scheduler: S) -> Publishers.IgnoreErrors<Publishers.HandleEvents<Self>> {
         handleEvents(receiveCompletion: { [weak object] completion in
             switch completion {
