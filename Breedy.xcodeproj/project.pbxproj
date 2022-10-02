@@ -671,7 +671,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/.scripts/run-swiftgen.sh\n";
+			shellScript = "if [ -z \"$CI\" ]; then\n    $SRCROOT/.scripts/run-swiftgen.sh\nfi\n";
 		};
 		6551BDA5278C7A0D00D7D4EA /* swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -689,7 +689,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SRCROOT/.scripts/run-swiftlint.sh\n";
+			shellScript = "if [ -z \"$CI\" ]; then\n    $SRCROOT/.scripts/run-swiftlint.sh\nfi\n";
 		};
 		8EA2053D5F04E08F9E32508D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
